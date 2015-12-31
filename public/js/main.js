@@ -19018,88 +19018,216 @@ module.exports = require('./lib/React');
 
 },{"./lib/React":53}],159:[function(require,module,exports){
 var React = require('react');
-var ListItem = require('./ListItem.jsx');
 
-var List = React.createClass({
-    displayName: 'List',
+var FirstBlock = React.createClass({
+    displayName: 'FirstBlock',
 
     render: function () {
-        var createItem = function (text, index) {
-            return React.createElement(ListItem, { key: index + text, text: text });
+
+        var divStyle = {
+            backgroundColor: 'DarkOrange',
+            borderRadius: '3',
+            border: '1px solid rgba(100,100,100,0.1)',
+            textAlign: 'center',
+            marginTop: '20',
+            boxShadow: '0 2px 20px 2px rgba(100,100,100,0.2), inset 0 2px 20px 2px rgba(100,100,100,0.1)'
+        };
+
+        if (this.props.color) {
+            divStyle.backgroundColor = this.props.color;
+        }
+
+        var titleStyle = {
+            marginTop: '50',
+            fontFamily: "Helvetica",
+            color: '#fff'
+        };
+
+        var locationStyle = {
+            marginBottom: '40',
+            fontFamily: "Helvetica",
+            fontWeight: 'bold',
+            color: '#fff'
         };
 
         return React.createElement(
-            'ul',
-            null,
-            this.props.items.map(createItem)
-        );
-    }
-});
-
-module.exports = List;
-
-},{"./ListItem.jsx":160,"react":158}],160:[function(require,module,exports){
-var React = require('react');
-var ListItem = React.createClass({
-    displayName: 'ListItem',
-
-    render: function () {
-        return React.createElement(
-            'li',
-            null,
+            'div',
+            { style: divStyle },
             React.createElement(
-                'h4',
-                null,
-                this.props.text
+                'h2',
+                { style: titleStyle },
+                this.props.title
+            ),
+            React.createElement(
+                'h5',
+                { style: locationStyle },
+                this.props.location
             )
         );
     }
 });
 
-module.exports = ListItem;
+module.exports = FirstBlock;
+
+},{"react":158}],160:[function(require,module,exports){
+var React = require('react');
+
+var SideBlock = React.createClass({
+    displayName: 'SideBlock',
+
+    render: function () {
+
+        var blankStyle = {
+            backgroundColor: 'DarkOrange',
+            borderRadius: '3',
+            border: '1px solid rgba(100,100,100,0.1)',
+            textAlign: 'left',
+            marginTop: '20',
+            height: '200',
+            boxShadow: '0 2px 20px 2px rgba(100,100,100,0.2), inset 0 2px 20px 2px rgba(100,100,100,0.1)'
+        };
+
+        if (this.props.color) {
+            blankStyle.backgroundColor = this.props.color;
+        }
+
+        var divStyle = {
+            backgroundColor: '#525252',
+            borderRadius: '3',
+            border: '1px solid rgba(100,100,100,0.1)',
+            textAlign: 'center',
+            marginTop: '0',
+            height: '80',
+            boxShadow: '0 2px 20px 2px rgba(100,100,100,0.2), inset 0 2px 20px 2px rgba(100,100,100,0.1)'
+        };
+
+        var dataStyle = {
+            marginLeft: '20',
+            marginTop: '10',
+            fontFamily: "Helvetica",
+            color: '#fff'
+        };
+
+        var titleStyle = {
+            marginLeft: '20',
+            marginTop: '-5',
+            marginBottom: '-20',
+            fontFamily: "Helvetica",
+            color: '#9E9E9E'
+        };
+
+        return React.createElement(
+            'div',
+            null,
+            React.createElement('div', { style: blankStyle }),
+            React.createElement(
+                'div',
+                { style: divStyle },
+                React.createElement(
+                    'div',
+                    { className: 'col-xs-4' },
+                    React.createElement(
+                        'h3',
+                        { style: dataStyle },
+                        this.props.data1
+                    ),
+                    React.createElement(
+                        'p',
+                        { style: titleStyle },
+                        this.props.title1
+                    )
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'col-xs-4' },
+                    React.createElement(
+                        'h3',
+                        { style: dataStyle },
+                        this.props.data2
+                    ),
+                    React.createElement(
+                        'p',
+                        { style: titleStyle },
+                        this.props.title2
+                    )
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'col-xs-4' },
+                    React.createElement(
+                        'h3',
+                        { style: dataStyle },
+                        this.props.data3
+                    ),
+                    React.createElement(
+                        'p',
+                        { style: titleStyle },
+                        this.props.title3
+                    )
+                )
+            )
+        );
+    }
+});
+
+module.exports = SideBlock;
 
 },{"react":158}],161:[function(require,module,exports){
 var React = require('react');
-var List = require('./List.jsx');
+var PanelItem = React.createClass({
+    displayName: 'PanelItem',
 
-var ListManager = React.createClass({
-    displayName: 'ListManager',
-
-    getInitialState: function () {
-        return { items: [], newItemText: '' };
-    },
-    onChange: function (e) {
-        this.setState({ newItemText: e.target.value });
-    },
-    handleSubmit: function (e) {
-        e.preventDefault();
-
-        var currentItems = this.state.items;
-
-        currentItems.push(this.state.newItemText);
-        this.setState({ items: currentItems, newItemText: '' });
-    },
     render: function () {
-
         var divStyle = {
-            marginTop: 10
+            borderRadius: '3',
+            border: '1px solid rgba(100,100,100,0.1)',
+            textAlign: 'left',
+            marginTop: '20',
+            background: 'white',
+            marginLeft: '0',
+            boxShadow: '0 2px 20px 2px rgba(100,100,100,0.2), inset 0 2px 20px 2px rgba(100,100,100,0.1)'
+        };
+        if (this.props.background) {
+            divStyle.background = this.props.background;
+        }
+        if (this.props.height) {
+            divStyle.height = this.props.height;
+        }
+        if (this.props.marginLeft) {
+            divStyle.marginLeft = this.props.marginLeft;
+        }
+        var titleStyle = {
+            marginTop: '50',
+            fontFamily: "Helvetica",
+            fontWeight: 'bold',
+            color: '#585858'
         };
 
-        var headingStyle = {};
+        if (this.props.titleBackground) {
+            titleStyle.background = this.props.titleBackground;
+        }
 
-        if (this.props.headingColor) {
-            headingStyle.background = this.props.headingColor;
+        var descStyle = {
+            marginBottom: '50',
+            fontFamily: 'Helvetica',
+            fontWeight: 'bold',
+            color: '#777'
+        };
+
+        if (this.props.descColor) {
+            descStyle.color = this.props.descColor;
         }
 
         return React.createElement(
             'div',
-            { style: divStyle, className: 'col-sm-4' },
+            null,
             React.createElement(
                 'div',
-                { className: 'panel panel-primary' },
+                { style: divStyle,
+                    className: 'col-sm-3' },
                 React.createElement(
                     'div',
-                    { style: headingStyle, className: 'panel-heading' },
+                    { style: titleStyle },
                     React.createElement(
                         'h3',
                         null,
@@ -19108,41 +19236,128 @@ var ListManager = React.createClass({
                 ),
                 React.createElement(
                     'div',
-                    { className: 'row panel-body' },
+                    { style: descStyle },
                     React.createElement(
-                        'form',
-                        { onSubmit: this.handleSubmit },
-                        React.createElement(
-                            'div',
-                            { className: 'col-sm-9' },
-                            React.createElement('input', { className: 'form-control', onChange: this.onChange, value: this.state.newItemText })
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'col-sm-2' },
-                            React.createElement(
-                                'button',
-                                { className: 'btn btn-primary' },
-                                'Add'
-                            )
-                        )
+                        'h5',
+                        null,
+                        this.props.desc
                     )
-                ),
-                React.createElement(List, { items: this.state.items })
-            )
+                )
+            ),
+            React.createElement('div', { className: 'col-sm-1' })
         );
     }
 });
 
-module.exports = ListManager;
+module.exports = PanelItem;
 
-},{"./List.jsx":159,"react":158}],162:[function(require,module,exports){
+},{"react":158}],162:[function(require,module,exports){
+var React = require('react');
+var FirstBlock = require('./FirstBlock.jsx');
+var SideBlock = require('./SideBlock.jsx');
+
+var SideBarManager = React.createClass({
+    displayName: 'SideBarManager',
+
+    render: function () {
+
+        return React.createElement(
+            'div',
+            null,
+            React.createElement(FirstBlock, { title: '18°', location: 'Paris' }),
+            React.createElement(SideBlock, { title: 'New visitors', data: '1.5k', color: 'dodgerblue' }),
+            React.createElement(SideBlock, { title: 'Bounce Rate', data: '50%', color: 'mediumpurple' }),
+            React.createElement(SideBlock, { title: 'Searchs', data: '28%', color: 'orangered' }),
+            React.createElement(SideBlock, { title: 'Traffic', data: '140.5 kb', color: 'yellowgreen' })
+        );
+    }
+});
+
+module.exports = SideBarManager;
+
+},{"./FirstBlock.jsx":159,"./SideBlock.jsx":163,"react":158}],163:[function(require,module,exports){
+var React = require('react');
+
+var SideBlock = React.createClass({
+    displayName: 'SideBlock',
+
+    render: function () {
+
+        var divStyle = {
+            backgroundColor: 'DarkOrange',
+            borderRadius: '3',
+            border: '1px solid rgba(100,100,100,0.1)',
+            textAlign: 'left',
+            marginTop: '20',
+            boxShadow: '0 2px 20px 2px rgba(100,100,100,0.2), inset 0 2px 20px 2px rgba(100,100,100,0.1)'
+        };
+
+        if (this.props.color) {
+            divStyle.backgroundColor = this.props.color;
+        }
+
+        var titleStyle = {
+            marginLeft: '20',
+            marginTop: '10',
+            marginBottom: '-20',
+            fontFamily: "Helvetica",
+            color: '#fff'
+        };
+
+        var dataStyle = {
+            marginLeft: '20',
+            marginBottom: '10',
+            fontFamily: "Helvetica",
+            fontWeight: 'bold',
+            color: '#fff'
+        };
+
+        var blankStyle = {
+            backgroundColor: '#fff',
+            borderRadius: '3',
+            border: '1px solid rgba(100,100,100,0.1)',
+            textAlign: 'left',
+            marginTop: '0',
+            height: '60',
+            boxShadow: '0 2px 20px 2px rgba(100,100,100,0.2), inset 0 2px 20px 2px rgba(100,100,100,0.1)'
+        };
+
+        return React.createElement(
+            'div',
+            null,
+            React.createElement(
+                'div',
+                { style: divStyle },
+                React.createElement(
+                    'p',
+                    { style: titleStyle },
+                    this.props.title
+                ),
+                React.createElement(
+                    'h3',
+                    { style: dataStyle },
+                    this.props.data
+                )
+            ),
+            React.createElement('div', { style: blankStyle })
+        );
+    }
+});
+
+module.exports = SideBlock;
+
+},{"react":158}],164:[function(require,module,exports){
 var React = require('react');
 var ReactDOM = require('react-dom');
-var ListManager = require('./components/ListManager.jsx');
+var PanelItem = require('./components/PanelItem.jsx');
+var LongPanelItem = require('./components/LongPanelItem.jsx');
+var SideBarManager = require('./components/SideBarManager.jsx');
 
-ReactDOM.render(React.createElement(ListManager, { title: 'Ingredients' }), document.getElementById('ingredients'));
-ReactDOM.render(React.createElement(ListManager, { title: 'ToDo' }), document.getElementById('todo'));
-ReactDOM.render(React.createElement(ListManager, { title: 'Christmas', headingColor: '#b31217' }), document.getElementById('christmas'));
+ReactDOM.render(React.createElement(PanelItem, { title: '20', desc: 'New followers added this month' }), document.getElementById('block1'));
+ReactDOM.render(React.createElement(PanelItem, { title: '$ 1250', desc: 'Average Monthly Income' }), document.getElementById('block2'));
+ReactDOM.render(React.createElement(PanelItem, { title: '$ 13865', desc: 'Yearly Income Goal' }), document.getElementById('block3'));
+ReactDOM.render(React.createElement(LongPanelItem, { color: 'dodgerblue', data1: '15080', title1: 'Shot Views', data2: '12000', title2: 'Likes', data3: '5100', title3: 'Comments' }), document.getElementById('long1'));
+ReactDOM.render(React.createElement(LongPanelItem, { color: 'PaleVioletRed ', data1: '15080', title1: 'Shot Views', data2: '12000', title2: 'Likes', data3: '5100', title3: 'Comments' }), document.getElementById('long2'));
+ReactDOM.render(React.createElement(SideBarManager, null), document.getElementById('sideBar'));
 
-},{"./components/ListManager.jsx":161,"react":158,"react-dom":29}]},{},[162]);
+},{"./components/LongPanelItem.jsx":160,"./components/PanelItem.jsx":161,"./components/SideBarManager.jsx":162,"react":158,"react-dom":29}]},{},[164]);
